@@ -1,0 +1,23 @@
+%h1= base_name.pluralize.titleize
+
+= link_to "new", new_polymorphic_path(model)
+
+- if get_collection_variable.empty?
+  %h2 Nothing found
+- else
+  = will_paginate get_collection_variable
+  %table
+    %thead
+      %tr
+        - content_columns.each do |column|
+          %th= header_for_column column
+        %th Actions
+    %tbody
+      - get_collection_variable.each do |obj|
+        %tr
+          - content_columns.each do |column|
+            %td= value_for_column(obj, column)
+          %td
+            = link_to 'edit', edit_polymorphic_path(obj)
+            = link_to 'destroy', polymorphic_path(obj), :method => :delete, :confirm => "Are you sure?"
+  = will_paginate get_collection_variable
