@@ -1,3 +1,51 @@
+# What is rails-crud?
+
+rails-crud is a plugin that abstracts a bunch of the repetitive CRUD actions out. Like scaffold, but I hate scaffold.
+
+# Installation
+
+Install it like a regular plugin.
+
+# Usage
+
+class Pastry < ActiveRecord::Base
+  validates_presence_of :name
+end
+
+class PastriesController
+  include CRUD::Base
+end
+
+Ta-da.
+
+Really, that's it.
+
+Your controller has to be the plural of your model.  Has to.
+
+You'll get the following actions:
+
+* index
+* new
+* create
+* edit
+* update
+* destroy
+
+They're ugly as sin, but they'll work like you want, and they're easily stylable.
+
+# Customizations
+
+You can customize the following views:
+
+* field layout on the forms 
+* column layout on index
+
+You can customize the following behavior:
+
+* some.  seriously, this is new documentation.  I'll get to it.  Or look at the code.  It's not terribly complicated.  Fork, update the docs and send me a pull request
+
 # Requirements:
 
 * haml
+* validation_reflection (not *really* required, but trust me, you'll want it.)
+* formtastic
