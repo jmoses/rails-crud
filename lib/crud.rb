@@ -6,13 +6,18 @@ module CRUD
 
     module ClassMethods
       def self.included(base)
-        base.send :before_filter, :build_object, :only => [:new, :create]
-        base.send :before_filter, :load_object, :only => [:edit, :update, :destroy]
-        base.send :before_filter, :load_collection, :only => :index
+        base.class_eval do
+          include ActiveSupport::Callbacks
+          
+          before_filter :build_object, :only => [:new, :create]
+          before_filter :load_object, :only => [:edit, :update, :destroy]
+          before_filter :load_collection, :only => :index
+                       
+          helper_method :base_name, :model, :get_model_variable, :get_collection_variable, :header_for_column,
+            :content_columns, :value_for_column
 
-        base.send :helper_method, :base_name, :model, :get_model_variable, :get_collection_variable, :header_for_column,
-          :content_columns, :value_for_column
-        
+          define_callbacks :before_save
+        end
       end
     end
     
@@ -27,6 +32,8 @@ module CRUD
     end
     
     def create
+      run_callbacks(:before_save)
+      
       if get_model_variable.save
         redirect_to :action => :index and return
       else
@@ -36,6 +43,9 @@ module CRUD
     
     def update
       get_model_variable.attributes = params[param_key]
+      
+      run_callbacks(:before_save)
+      
       if get_model_variable.save
         redirect_to :action => :index and return
       else
