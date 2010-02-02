@@ -15,5 +15,9 @@ module CRUD
         render :partial => "crud/#{partial}", :locals => locals
       end
     end
+    
+    def other_actions( object )
+      crud_partial "other_actions", :object => object
+    end
   end
 end
