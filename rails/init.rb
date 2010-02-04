@@ -1,4 +1,2 @@
-require 'crud'
-require 'crud_helper'
-
+require 'rails-crud'
 ActionView::Base.send :include, CRUD::CrudHelper

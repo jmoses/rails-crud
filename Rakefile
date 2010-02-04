@@ -11,7 +11,7 @@ PKG_FILES = FileList[
 
 spec = Gem::Specification.new do |s|
   s.name = 'rails-crud'
-  s.version = '0.0.1'
+  s.version = '0.0.2'
   s.author = 'Jon Moses'
   s.email = 'jon@burningbush.us'
   s.homepage = 'http://github.com/jmoses/rails-crud'
