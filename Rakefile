@@ -1,15 +1,15 @@
-require 'rubgems'
+require 'rubygems'
 require 'rake'
 require 'rake/gempackagetask'
 
-PKG_FILES = [
+PKG_FILES = FileList[
   '[a-zA-Z]*',
   'lib/**/*',
   'app/**/*',
   'rails/**/*'
 ]
 
-spec = GemSpecification.new do |s|
+spec = Gem::Specification.new do |s|
   s.name = 'rails-crud'
   s.version = '0.0.1'
   s.author = 'Jon Moses'
